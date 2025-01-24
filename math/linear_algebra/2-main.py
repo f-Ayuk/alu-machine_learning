@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 mat1 = [[1, 2], [3, 4]]
 print(matrix_shape(mat1))  # Output: [2, 2]
 
