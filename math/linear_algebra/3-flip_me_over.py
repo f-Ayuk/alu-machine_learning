@@ -13,7 +13,7 @@ def matrix_transpose(matrix):
 
     rows = len(matrix)
     cols = len(matrix[0])  # Assuming all rows have the same number of columns
-    transposed = [[0 for _ in range(rows)] for _ in range(cols)]  
+    transposed = [[0 for _ in range(rows)] for _ in range(cols)]
     # Initialize empty matrix
 
     for i in range(rows):
