@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 mat1 = [[1, 2], [3, 4]]
 print(matrix_transpose(mat1))  # Output: [[1, 3], [2, 4]]
 
