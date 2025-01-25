@@ -1,7 +1,7 @@
-#!/usr/bin/python3
-import numpy as np
+#!/usr/bin/env python3
+"""A function that transposes a matrix"""
+
+
 def np_transpose(matrix):
-  """
-  Transposes a NumPy ndarray.
-  """
-    return matrix.T
+    """Getting the transpose of a matrix"""
+    return matrix.transpose()
