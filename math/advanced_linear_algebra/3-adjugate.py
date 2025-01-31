@@ -2,17 +2,6 @@
 """Getting the adjugate matrix of a matrix"""
 
 
-def adjugate(matrix):
-    """Function that calculates the adjugate of a matrix"""
-    cof = minor(matrix)
-    temp = []
-    for x in range(len(cof)):
-        temp.append([])
-        for y in range(len(cof)):
-            temp[x].append(cof[y][x])
-    return temp
-
-
 def determinant(matrix):
     """Function that calculates the determinant of a matrix"""
     if len(matrix) == 1:
@@ -59,3 +48,14 @@ def minor(matrix):
             t.append(determinant(s) * sign)
         minor_matrix.append(t)
     return minor_matrix
+
+
+def adjugate(matrix):
+    """Function that calculates the adjugate of a matrix"""
+    cof = minor(matrix)
+    temp = []
+    for x in range(len(cof)):
+        temp.append([])
+        for y in range(len(cof)):
+            temp[x].append(cof[y][x])
+    return temp
