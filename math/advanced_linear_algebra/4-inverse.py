@@ -22,7 +22,7 @@ def adjugate(matrix):
     return temp
 
 
-ef determinant(matrix):
+def determinant(matrix):
     """Function that calculates the determinant of a matrix"""
     if len(matrix) == 1:
         return matrix[0][0]
