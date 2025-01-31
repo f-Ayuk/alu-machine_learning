@@ -22,25 +22,24 @@ def adjugate(matrix):
     return temp
 
 
-def determinant(matrix):
+def det(matrix):
     """Function that calculates the determinant of a matrix"""
     if len(matrix) == 1:
         return matrix[0][0]
     if len(matrix) == 2:
-        det = ((matrix[0][0] * matrix[1][1])
-                  - (matrix[0][1] * matrix[1][0]))
-        return det
+        x = (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+        return x
     det = 0
-    for i, j in enumerate(matrix[0]):
-        row = [r for r in matrix[1:]]
+    for x, num in enumerate(matrix):
         temp = []
-        for r in row:
-            a = []
-            for c in range(len(matrix)):
-                if c != i:
-                    a.append(r[c])
-            temp.append(a)
-        det += j * (-1) ** i * determinant(temp)
+        P = matrix[0][x]
+        for row in matrix[1:]:
+            new = []
+            for j in range(len(matrix)):
+                if j != x:
+                    new.append(row[j])
+            temp.append(new)
+        det += P * determinant(temp) * (-1) ** x
     return det
 
 
@@ -49,10 +48,11 @@ def determinant(matrix):
     if len(matrix) == 1:
         return matrix[0][0]
     if len(matrix) == 2:
-        det = ((matrix[0][0] * matrix[1][1])
+        determ = ((matrix[0][0] * matrix[1][1])
                   - (matrix[0][1] * matrix[1][0]))
         return determ
-    det = 0
+
+    determ = 0
     for i, j in enumerate(matrix[0]):
         row = [r for r in matrix[1:]]
         temp = []
@@ -62,8 +62,8 @@ def determinant(matrix):
                 if c != i:
                     a.append(r[c])
             temp.append(a)
-        det += j * (-1) ** i * determinant(temp)
-    return det
+        determ += j * (-1) ** i * determinant(temp)
+    return determ
 
 
 def minor(matrix):
@@ -77,7 +77,8 @@ def minor(matrix):
 
     if len(matrix) == 1:
         return [[1]]
-    minor_matrix = []
+
+    mino = []
     for x in range(len(matrix)):
         t = []
         for y in range(len(matrix[0])):
@@ -86,5 +87,5 @@ def minor(matrix):
                 s.append(row[:y] + row[y + 1:])
             sign = (-1) ** ((x + y) % 2)
             t.append(determinant(s) * sign)
-        minor_matrix.append(t)
-    return minor_matrix
+        mino.append(t)
+    return mino
