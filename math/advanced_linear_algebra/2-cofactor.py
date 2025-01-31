@@ -5,6 +5,8 @@
 def cofactor(matrix):
     """Function that calculates the cofactor matrix of a matrix"""
     return minor(matrix)
+
+
 def determinant(matrix):
     """Function that calculates the determinant of a matrix"""
     if len(matrix) == 1:
@@ -25,6 +27,8 @@ def determinant(matrix):
             temp.append(a)
         determ += j * (-1) ** i * determinant(temp)
     return determ
+
+
 def minor(matrix):
     """Function that calculates the minor matrix of a matrix"""
     if not isinstance(matrix, list) or matrix == []:
