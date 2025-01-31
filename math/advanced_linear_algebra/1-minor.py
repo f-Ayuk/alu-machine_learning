@@ -22,6 +22,8 @@ def determinant(matrix):
             temp.append(a)
         det += j * (-1) ** i * determinant(temp)
     return det
+
+
 def minor(matrix):
     """Function that calculates the minor matrix of a matrix"""
     if not isinstance(matrix, list) or matrix == []:
