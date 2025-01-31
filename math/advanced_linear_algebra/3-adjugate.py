@@ -8,7 +8,7 @@ def determinant(matrix):
         return matrix[0][0]
     if len(matrix) == 2:
         det = ((matrix[0][0] * matrix[1][1])
-                  - (matrix[0][1] * matrix[1][0]))
+        - (matrix[0][1] * matrix[1][0]))
         return det
     det = 0
     for i, j in enumerate(matrix[0]):
@@ -35,7 +35,6 @@ def minor(matrix):
 
     if len(matrix) == 1:
         return [[1]]
-
     minor_matrix = []
     for x in range(len(matrix)):
         t = []
