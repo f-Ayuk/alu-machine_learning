@@ -12,10 +12,10 @@ def determinant(matrix):
     if len(matrix) == 1:
         return matrix[0][0]
     if len(matrix) == 2:
-        determ = ((matrix[0][0] * matrix[1][1])
+        det = ((matrix[0][0] * matrix[1][1])
                   - (matrix[0][1] * matrix[1][0]))
-        return determ
-    determ = 0
+        return det
+    det = 0
     for i, j in enumerate(matrix[0]):
         row = [r for r in matrix[1:]]
         temp = []
@@ -25,8 +25,8 @@ def determinant(matrix):
                 if c != i:
                     a.append(r[c])
             temp.append(a)
-        determ += j * (-1) ** i * determinant(temp)
-    return determ
+        det += j * (-1) ** i * determinant(temp)
+    return det
 
 
 def minor(matrix):
