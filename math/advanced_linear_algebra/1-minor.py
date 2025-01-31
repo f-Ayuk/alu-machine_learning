@@ -3,88 +3,43 @@
 
 
 def determinant(matrix):
-    """Calculates the determinant of a matrix."""
-    if not all(isinstance(row, list) for row in matrix) or
-    not isinstance(matrix, list):
-        raise TypeError("matrix must be a list of lists")
-    n = len(matrix)
-    if any(len(row) != n for row in matrix):
-        raise ValueError("matrix must be a square matrix")
-    if n == 0:
-        return 1
-        # The determinant of a 0x0 matrix is conventionally defined as 1
-    if n == 1:
+    """Function that calculates the determinant of a matrix"""
+    if len(matrix) == 1:
         return matrix[0][0]
-    if n == 2:
-        return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+    if len(matrix) == 2:
+        det = ((matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0]))
+        return det
     det = 0
-    for c in range(n):
-        sub_matrix = [row[:c] + row[c+1:] for row in matrix[1:]]
-        det += ((-1) ** c) * matrix[0][c] * determinant(sub_matrix)
+    for i, j in enumerate(matrix[0]):
+        row = [r for r in matrix[1:]]
+        temp = []
+        for r in row:
+            a = []
+            for c in range(len(matrix)):
+                if c != i:
+                    a.append(r[c])
+            temp.append(a)
+        det += j * (-1) ** i * determinant(temp)
     return det
 
 
 def minor(matrix):
-    """Calculates the minor matrix of a matrix."""
-    if not isinstance(matrix, list) or not all(isinstance(row, list)
-        for row in matrix):
-            raise TypeError("matrix must be a list of lists")
-    n = len(matrix)
-    if n == 0 or any(len(row) != n for row in matrix):
-        raise ValueError("matrix must be a non-empty square matrix")
+    """Function that calculates the minor matrix of a matrix"""
+    if not isinstance(matrix, list) or matrix == []:
+        raise TypeError('matrix must be a list of lists')
+    if any(not isinstance(row, list) for row in matrix):
+        raise TypeError('matrix must be a list of lists')
+    if any(len(row) != len(matrix) for row in matrix):
+        raise ValueError('matrix must be a non-empty square matrix')
+    if len(matrix) == 1:
+        return [[1]]
     minor_matrix = []
-    for i in range(n):
-        minor_row = []
-        for j in range(n):
-            sub_matrix = [row[:j] + row[j+1:]
-            for row in (matrix[:i] + matrix[i+1:])]
-                minor_row.append(determinant(sub_matrix))
-        minor_matrix.append(minor_row)
+    for x in range(len(matrix)):
+        t = []
+        for y in range(len(matrix[0])):
+            s = []
+            for row in (matrix[:x] + matrix[x + 1:]):
+                s.append(row[:y] + row[y + 1:])
+            t.append(determinant(s))
+        minor_matrix.append(t)
     return minor_matrix
-
-
-def cofactor(matrix):
-    """Calculates the cofactor matrix of a matrix."""
-    if not isinstance(matrix, list) or not all(isinstance(row, list)
-        for row in matrix):
-            raise TypeError("matrix must be a list of lists")  
-    n = len(matrix)
-    if n == 0 or any(len(row) != n for row in matrix):
-        raise ValueError("matrix must be a non-empty square matrix")
-    cofactor_matrix = minor(matrix)
-    for i in range(n):
-        for j in range(n):
-            cofactor_matrix[i][j] *= (-1) ** (i + j)
-    return cofactor_matrix
-
-
-def adjugate(matrix):
-    """Calculates the adjugate matrix of a matrix."""
-    if not isinstance(matrix, list) or not all(isinstance(row, list)
-        for row in matrix):
-            raise TypeError("matrix must be a list of lists")
-    n = len(matrix)
-    if n == 0 or any(len(row) != n for row in matrix):
-        raise ValueError("matrix must be a non-empty square matrix")
-    cofactor_matrix = cofactor(matrix)
-    # Transpose the cofactor matrix to get the adjugate matrix
-    adjugate_matrix = [[cofactor_matrix[j][i]
-        for j in range(n)]
-            for i in range(n)]
-    return adjugate_matrix
-
-
-def inverse(matrix):
-    """Calculates the inverse of a matrix."""
-    if not isinstance(matrix, list) or not all(isinstance(row, list)
-        for row in matrix):
-            raise TypeError("matrix must be a list of lists")
-    n = len(matrix)
-    if n == 0 or any(len(row) != n for row in matrix):
-        raise ValueError("matrix must be a non-empty square matrix")
-    det = determinant(matrix)
-    if det == 0:
-        return None  # Matrix is singular, no inverse exists
-    adj = adjugate(matrix)
-    inv = [[adj[i][j] / det for j in range(n)] for i in range(n)]
-    return inv
