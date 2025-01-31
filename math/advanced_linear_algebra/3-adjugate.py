@@ -31,7 +31,6 @@ def minor(matrix):
         raise TypeError('matrix must be a list of lists')
     if any(len(row) != len(matrix) for row in matrix):
         raise ValueError('matrix must be a non-empty square matrix')
-
     if len(matrix) == 1:
         return [[1]]
     minor_matrix = []
