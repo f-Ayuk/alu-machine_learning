@@ -34,3 +34,18 @@ class Poisson:
 
         p = (self.lambtha ** k) * (self.E ** -self.lambtha) / self.factorial(k)
         return p
+
+    def cdf(self, k):
+        """Calculates the value of the CDF (cumulative distribution function)
+        for a given number of “successes”"""
+        if not isinstance(k, int):
+            k = int(k)
+        if k < 0:
+            return 0
+
+        def p(k):
+
+            p = (self.lambtha ** k) * (self.E ** -
+                                       self.lambtha) / self.factorial(k)
+            return p
+        return sum([p(k) for k in range(0, k+1)])
