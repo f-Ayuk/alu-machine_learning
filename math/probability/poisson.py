@@ -30,7 +30,7 @@ class Poisson:
         for i in range(1, k+1):
             result = result * i
         return result
-    
+
     def pmf(self, k):
         """Calculates the value of the PMF (probability mass function)
         for a given number of “successes”"""
