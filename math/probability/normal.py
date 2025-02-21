@@ -32,3 +32,19 @@ class Normal:
     def x_value(self, z):
         """Calculates the x-value of a given z-score"""
         return (z * self.stddev) + self.mean
+
+    def pdf(self, x):
+        """Calculates the value of the PDF for a given x-value"""
+        return (self.E ** (-0.5 * ((x - self.mean) / self.stddev) ** 2)
+                / (self.stddev * ((2 * self.PI) ** 0.5)))
+
+    def cdf(self, x):
+        """Calculates the value of the CDF for a given x-value"""
+        return (0.5 * (1 + self.erf((x - self.mean) /
+                                    (self.stddev * 2 ** 0.5))))
+
+    def erf(self, x):
+        """ Calculates the error function"""
+
+        return (2 / (self.PI ** 0.5)) * (x - (x ** 3) / 3 + (x ** 5) / 10
+                                         - (x ** 7) / 42 + (x ** 9) / 216)
