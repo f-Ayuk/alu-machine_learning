@@ -28,3 +28,17 @@ class Binomial:
             self.p = 1 - (var / mean)
             self.n = round(mean / self.p)
             self.p = mean / self.n
+
+    def factorial(self, k):
+        """Obtaining the factorial of a number."""
+        result = 1
+        for i in range(1, k+1):
+            result = result * i
+        return result
+
+    def pmf(self, k):
+        """Calculates the value of the PMF for a given number of “successes”"""
+        if not isinstance(k, int):
+            k = int(k)
+        if k < 0:
+            return 0
