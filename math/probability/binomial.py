@@ -42,7 +42,8 @@ class Binomial:
             k = int(k)
         if k < 0:
             return 0
-                n_fact = self.factorial(self.n)
+
+        n_fact = self.factorial(self.n)
         k_fact = self.factorial(k)
         n_k_fact = self.factorial(self.n - k)
         return (n_fact / (k_fact * n_k_fact)) * \
