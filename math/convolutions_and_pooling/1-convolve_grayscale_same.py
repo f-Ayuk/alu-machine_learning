@@ -6,7 +6,7 @@ import numpy as np
 
 
 def convolve_grayscale_same(images, kernel):
-    """Function that performs a same convolution on grayscale images"""   
+    """Function that performs a same convolution on grayscale images"""
     kh, kw = kernel.shape
     m, hm, wm = images.shape
     ph = int(kh / 2)
