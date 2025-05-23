@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-  """Concatenates two 2D matrices along a specific axis."""
+"""Writing a function that concatenates two
+matrices along a specific axis"""
 
 
-  def cat_matrices2D(matrix1, matrix2, axis=0):
+def cat_matrices2D(matrix1, matrix2, axis=0):
     """Concatenating two matrices along axis 0"""
     if axis == 0:
         if len(matrix1[0]) != len(matrix2[0]):
