@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+"""Getting the transpose of a matrix"""
+
 
 def matrix_transpose(matrix):
     """
@@ -10,7 +12,6 @@ def matrix_transpose(matrix):
     Returns:
         A new matrix representing the transpose of the input matrix.
     """
-
     rows = len(matrix)
     cols = len(matrix[0])  # Assuming all rows have the same number of columns
     transposed = [[0 for _ in range(rows)] for _ in range(cols)]
