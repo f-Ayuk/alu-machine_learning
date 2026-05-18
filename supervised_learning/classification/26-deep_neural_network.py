@@ -55,7 +55,7 @@ class DeepNeuralNetwork:
         sets private instance attributes:
             __L: the number of layers in the neural network,
                 initialised based on layers
-            __cache: a dictionary holding all intermediary values for the 
+            __cache: a dictionary holding all intermediary values for the
             network,
                 initialised as an empty dictionary
             __weights: a dictionary holding all weights/biases of the network,
