@@ -55,7 +55,8 @@ class DeepNeuralNetwork:
         sets private instance attributes:
             __L: the number of layers in the neural network,
                 initialised based on layers
-            __cache: a dictionary holding all intermediary values for the network,
+            __cache: a dictionary holding all intermediary values for the 
+            network,
                 initialised as an empty dictionary
             __weights: a dictionary holding all weights/biases of the network,
                 weights initialised using the He et al. method
@@ -284,7 +285,7 @@ class DeepNeuralNetwork:
                         raise ValueError.
 
         returns:
-            the evaluation of the training data after iterations of training
+            Evaluation of the training data after iterations of training
         """
         if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
