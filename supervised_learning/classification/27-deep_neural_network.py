@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-""" 
+"""
 Deep Neural Network
 """
 
@@ -9,13 +9,13 @@ import pickle
 
 
 class DeepNeuralNetwork:
-    """ 
+    """
     A class that defines a deep neural network performing binary
         classification.
     """
 
     def __init__(self, nx, layers):
-        """ 
+        """
         Instantiation function
 
         Args:
@@ -56,7 +56,7 @@ class DeepNeuralNetwork:
     # add getter method
     @property
     def L(self):
-        """ 
+        """
         Return layers in the neural network"""
         return self.__L
 
