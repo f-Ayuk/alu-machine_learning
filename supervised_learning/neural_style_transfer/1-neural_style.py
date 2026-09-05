@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-
 import numpy as np
 import tensorflow as tf
 
 
 class NST:
-    """ Performs tasks for neural style transfer."""
+    """Performs tasks for neural style transfer."""
 
     style_layers = [
         'block1_conv1',
@@ -78,32 +77,38 @@ class NST:
         return tf.expand_dims(image, axis=0)
 
     def load_model(self):
-        """ Creates the model used to calculate the style transfer cost."""
-        vgg = tf.keras.applications.VGG19(
-            include_top=False,
-            weights='imagenet'
-        )
+    """Creates the model used to calculate the style transfer cost."""
+    base = tf.keras.applications.VGG19(
+        include_top=False,
+        weights='imagenet'
+    )
 
-        # Replace max pooling layers with average pooling.
-        for layer in vgg.layers:
-            if isinstance(layer, tf.keras.layers.MaxPooling2D):
-                layer._name = layer.name
-                layer = tf.keras.layers.AveragePooling2D(
-                    pool_size=(2, 2),
-                    strides=(2, 2)
-                )
+    inputs = tf.keras.Input(shape=(None, None, 3))
+    x = inputs
 
-        vgg.trainable = False
+    for layer in base.layers[1:]:
+        if isinstance(layer, tf.keras.layers.MaxPooling2D):
+            x = tf.keras.layers.AveragePooling2D(
+                pool_size=layer.pool_size,
+                strides=layer.strides,
+                padding=layer.padding,
+                name=layer.name
+            )(x)
+        else:
+            x = layer(x)
 
-        outputs = []
-        for layer_name in self.style_layers:
-            outputs.append(vgg.get_layer(layer_name).output)
+    model = tf.keras.Model(inputs=inputs, outputs=x)
 
-        outputs.append(vgg.get_layer(self.content_layer).output)
+    for layer in model.layers:
+        layer.trainable = False
 
-        self.model = tf.keras.Model(
-            inputs=vgg.input,
-            outputs=outputs
-        )
+    outputs = [
+        model.get_layer(name).output
+        for name in self.style_layers
+    ]
+    outputs.append(model.get_layer(self.content_layer).output)
 
-        self.model.trainable = False
+    self.model = tf.keras.Model(
+        inputs=model.input,
+        outputs=outputs
+    )
