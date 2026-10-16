@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 Function finds the best number of clusters for a GMM using
