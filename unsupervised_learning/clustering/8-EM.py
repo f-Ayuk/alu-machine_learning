@@ -36,13 +36,15 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5,
         pi, m, S = maximization(X, g)
         g, new_log_likelihood = expectation(X, pi, m, S)
 
-        if abs(new_log_likelihood - log_likelihood) <= tol:
-            return pi, m, S, g, new_log_likelihood
+        converged = abs(new_log_likelihood - log_likelihood) <= tol
+
+        if verbose and ((i + 1) % 10 == 0 or converged):
+            print("Log Likelihood after {} iterations: {:.5f}".format(
+                i + 1, new_log_likelihood))
 
         log_likelihood = new_log_likelihood
 
-        if verbose and (i + 1) % 10 == 0:
-            print("Log Likelihood after {} iterations: {:.5f}".format(
-                i + 1, log_likelihood))
+        if converged:
+            break
 
     return pi, m, S, g, log_likelihood
