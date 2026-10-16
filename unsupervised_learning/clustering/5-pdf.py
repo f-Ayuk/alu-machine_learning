@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 '''
-pdf(X, m, S) function calculates the 
+pdf(X, m, S) function calculates the
 probability density function of a Gaussian distribution
 '''
 
