@@ -11,7 +11,7 @@ variance = __import__('2-variance').variance
 
 def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     """
-    Tests different values of k to find the optimum number of clusters.
+    Test different values of k to find the optimum number of clusters.
 
     Args:
         X (numpy.ndarray): Dataset of shape (n_samples, n_features).
@@ -20,27 +20,24 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         iterations (int): Maximum number of K-means iterations.
 
     Returns:
-        tuple: A list of (centroids, cluster assignments) and a list
-        of variance differences, or (None, None) if invalid.
+        tuple: A list of clustering results and a list of variance
+        differences, or (None, None) if an argument is invalid.
     """
     if not isinstance(X, np.ndarray) or X.ndim != 2:
         return None, None
 
-    if (not isinstance(kmin, int) or isinstance(kmin, bool)
-            or kmin <= 0):
+    if type(kmin) is not int or kmin <= 0:
         return None, None
 
     if kmax is None:
         kmax = X.shape[0]
-    elif (not isinstance(kmax, int) or isinstance(kmax, bool)
-          or kmax <= 0):
+    elif type(kmax) is not int or kmax <= 0:
         return None, None
 
     if kmax < kmin:
         return None, None
 
-    if (not isinstance(iterations, int) or isinstance(iterations, bool)
-            or iterations <= 0):
+    if type(iterations) is not int or iterations <= 0:
         return None, None
 
     results = []
