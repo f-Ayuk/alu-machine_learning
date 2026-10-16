@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 '''
 Expectation Maximization for a Gaussian Mixture Model
@@ -28,18 +29,21 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5,
     pi, m, S = initialize(X, k)
     g, log_likelihood = expectation(X, pi, m, S)
 
+    if verbose:
+        print("Log Likelihood after 0 iterations: {:.5f}".format(
+            log_likelihood))
+
     for i in range(iterations):
         pi, m, S = maximization(X, g)
         g, new_log_likelihood = expectation(X, pi, m, S)
 
-        if verbose and i % 10 == 0:
-            print("Log Likelihood after {} iterations: {:.5f}".format(
-                i, new_log_likelihood))
-
         if abs(new_log_likelihood - log_likelihood) <= tol:
-            log_likelihood = new_log_likelihood
-            break
+            return pi, m, S, g, new_log_likelihood
 
         log_likelihood = new_log_likelihood
+
+        if verbose and (i + 1) % 10 == 0:
+            print("Log Likelihood after {} iterations: {:.5f}".format(
+                i + 1, log_likelihood))
 
     return pi, m, S, g, log_likelihood
