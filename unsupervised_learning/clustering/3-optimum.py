@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 Find the optimum number of clusters based on variance.
