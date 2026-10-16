@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 '''
 Expectation Maximization for a Gaussian Mixture Model
