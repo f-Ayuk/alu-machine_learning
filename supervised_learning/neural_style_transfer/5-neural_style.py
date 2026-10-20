@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 """
 Defines class NST that performs tasks for neural style transfer.
